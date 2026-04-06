@@ -1,0 +1,1393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ClassVault – Academic Portal</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --gold:#C9A84C;--gold-l:#F0D98A;--gold-dim:rgba(201,168,76,0.15);
+  --navy:#0D1B2A;--navy-m:#1A2E45;--navy-l:#243B55;
+  --cream:#FAF7F0;--cream-d:#F0EBE0;
+  --tp:#0D1B2A;--tm:#5A6B7C;--tl:#9AAABB;
+  --white:#FFF;--red:#C0392B;--green:#1A7A4A;
+  --border:#E8E2D6;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--tp);min-height:100vh}
+a{color:inherit;text-decoration:none}
+
+/* ── PAGES ── */
+.pg{display:none!important}
+.pg.on{display:block!important}
+.pg.flex-on{display:flex!important}
+
+/* ── LANDING ── */
+#pg-land{background:var(--navy);min-height:100vh;flex-direction:column}
+.l-nav{display:flex;align-items:center;justify-content:space-between;padding:1.4rem 4rem;border-bottom:1px solid rgba(201,168,76,.18)}
+.logo{font-family:'Playfair Display',serif;font-size:1.4rem;color:var(--gold);display:flex;align-items:center;gap:.65rem;font-weight:700;letter-spacing:.02em}
+.logo-box{width:34px;height:34px;background:var(--gold);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:1.1rem}
+.l-hero{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:5rem 1.5rem 3rem}
+.l-badge{display:inline-flex;align-items:center;gap:.4rem;background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.3);color:var(--gold-l);font-size:.75rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;padding:.4rem 1.1rem;border-radius:100px;margin-bottom:1.8rem}
+.l-h1{font-family:'Playfair Display',serif;font-size:clamp(2.8rem,7vw,5rem);color:#fff;line-height:1.1;margin-bottom:1.3rem;font-weight:700}
+.l-h1 span{color:var(--gold)}
+.l-sub{font-size:1.05rem;color:rgba(255,255,255,.5);max-width:540px;line-height:1.75;margin-bottom:3rem;font-weight:300}
+.hero-btns{display:flex;gap:.85rem;flex-wrap:wrap;justify-content:center;margin-bottom:4rem}
+.btn-p{background:var(--gold);color:var(--navy);border:none;padding:.85rem 2.2rem;border-radius:8px;font-size:.9rem;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s;letter-spacing:.02em}
+.btn-p:hover{background:var(--gold-l);transform:translateY(-1px)}
+.btn-o{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.22);padding:.85rem 2.2rem;border-radius:8px;font-size:.9rem;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s}
+.btn-o:hover{border-color:var(--gold);color:var(--gold)}
+.feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;max-width:860px;width:100%}
+.feat-card{background:rgba(255,255,255,.04);border:1px solid rgba(201,168,76,.14);border-radius:12px;padding:1.4rem;text-align:left}
+.feat-icon{font-size:1.6rem;margin-bottom:.85rem}
+.feat-card h3{font-size:.9rem;font-weight:600;color:#fff;margin-bottom:.35rem}
+.feat-card p{font-size:.77rem;color:rgba(255,255,255,.38);line-height:1.55}
+
+/* ── ROLE SELECT ── */
+#pg-role{background:var(--navy);min-height:100vh;flex-direction:column;align-items:center;justify-content:center;padding:2rem}
+.role-cards{display:flex;gap:1.3rem;flex-wrap:wrap;justify-content:center;margin-top:2.5rem}
+.r-card{background:rgba(255,255,255,.04);border:1px solid rgba(201,168,76,.2);border-radius:14px;padding:2.5rem 2.2rem;text-align:center;cursor:pointer;transition:all .22s;width:200px}
+.r-card:hover{background:rgba(201,168,76,.08);border-color:var(--gold);transform:translateY(-3px)}
+.r-icon{font-size:2.6rem;margin-bottom:1rem}
+.r-card h3{font-family:'Playfair Display',serif;color:#fff;font-size:1.2rem;margin-bottom:.4rem}
+.r-card p{color:rgba(255,255,255,.37);font-size:.76rem;line-height:1.5}
+
+/* ── AUTH ── */
+#pg-auth{background:var(--navy);min-height:100vh;align-items:center;justify-content:center;padding:2rem;position:relative}
+.auth-card{background:rgba(255,255,255,.04);border:1px solid rgba(201,168,76,.2);border-radius:18px;padding:2.8rem;width:100%;max-width:430px}
+.auth-logo{font-family:'Playfair Display',serif;font-size:1.25rem;color:var(--gold);text-align:center;margin-bottom:1.6rem}
+.auth-badge{text-align:center;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:1.2rem}
+.auth-title{font-family:'Playfair Display',serif;color:#fff;font-size:1.55rem;text-align:center;margin-bottom:.4rem}
+.auth-sub{color:rgba(255,255,255,.38);text-align:center;font-size:.82rem;margin-bottom:1.8rem}
+.field{margin-bottom:1.1rem}
+.field label{display:block;color:rgba(255,255,255,.55);font-size:.75rem;font-weight:600;margin-bottom:.45rem;letter-spacing:.06em;text-transform:uppercase}
+.field input,.field select{width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.11);border-radius:8px;padding:.75rem .95rem;color:#fff;font-family:'DM Sans',sans-serif;font-size:.9rem;outline:none;transition:border-color .2s}
+.field input:focus,.field select:focus{border-color:var(--gold)}
+.field input::placeholder{color:rgba(255,255,255,.22)}
+.auth-btn{width:100%;background:var(--gold);color:var(--navy);border:none;padding:.9rem;border-radius:8px;font-size:.9rem;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;margin-top:.4rem;transition:all .2s}
+.auth-btn:hover{background:var(--gold-l)}
+.auth-hint{text-align:center;margin-top:.9rem;font-size:.75rem;color:rgba(255,255,255,.28)}
+.auth-hint span{color:var(--gold);cursor:pointer;text-decoration:underline}
+.auth-toggle{text-align:center;margin-top:1rem;font-size:.8rem;color:rgba(255,255,255,.38);cursor:pointer}
+.auth-toggle span{color:var(--gold)}
+.auth-err{background:rgba(192,57,43,.15);border:1px solid rgba(192,57,43,.4);color:#E74C3C;padding:.65rem 1rem;border-radius:8px;font-size:.8rem;margin-bottom:1rem;display:none}
+
+/* ── APP SHELL ── */
+.shell{display:flex;min-height:100vh}
+.sidebar{width:252px;background:var(--navy);display:flex;flex-direction:column;position:fixed;top:0;left:0;bottom:0;z-index:100;border-right:1px solid rgba(201,168,76,.13);overflow-y:auto}
+.sb-head{padding:1.3rem 1.4rem .85rem;border-bottom:1px solid rgba(201,168,76,.09)}
+.sb-logo{font-family:'Playfair Display',serif;font-size:1.2rem;color:var(--gold);display:flex;align-items:center;gap:.55rem}
+.sb-pill{display:inline-block;margin-top:.5rem;background:rgba(201,168,76,.11);color:var(--gold);font-size:.66rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:.28rem .75rem;border-radius:100px;border:1px solid rgba(201,168,76,.2)}
+.sb-user{padding:.9rem 1.4rem;display:flex;align-items:center;gap:.7rem;border-bottom:1px solid rgba(255,255,255,.05)}
+.avatar{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.82rem;flex-shrink:0}
+.av-gold{background:linear-gradient(135deg,var(--gold),#8B6914);color:var(--navy)}
+.av-blue{background:linear-gradient(135deg,#4A90D9,#1A5FA8);color:#fff}
+.u-name{font-size:.82rem;font-weight:600;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.u-email{font-size:.68rem;color:rgba(255,255,255,.33);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.nav-sec{padding:.85rem .65rem;flex:1}
+.nav-lbl{font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.28);font-weight:600;padding:.4rem .65rem;margin-bottom:.2rem}
+.nav-it{display:flex;align-items:center;gap:.7rem;padding:.65rem .65rem;border-radius:7px;cursor:pointer;transition:all .14s;color:rgba(255,255,255,.45);font-size:.84rem;font-weight:500;margin-bottom:2px}
+.nav-it:hover{background:rgba(255,255,255,.06);color:#fff}
+.nav-it.act{background:rgba(201,168,76,.12);color:var(--gold)}
+.nav-icon{font-size:.95rem;opacity:.8;width:19px;text-align:center}
+.badge{background:#C0392B;color:#fff;font-size:.62rem;font-weight:700;padding:.14rem .42rem;border-radius:100px;margin-left:auto}
+.sb-foot{padding:.9rem 1.4rem;border-top:1px solid rgba(255,255,255,.05)}
+.logout-btn{width:100%;background:transparent;border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.37);padding:.55rem;border-radius:7px;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:.78rem;transition:all .2s}
+.logout-btn:hover{border-color:#C0392B;color:#E74C3C}
+
+/* ── MAIN ── */
+.main{margin-left:252px;flex:1;background:var(--cream);min-height:100vh}
+.topbar{background:var(--white);border-bottom:1px solid var(--border);padding:.9rem 1.8rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50}
+.tb-title{font-family:'Playfair Display',serif;font-size:1.2rem;color:var(--navy);font-weight:600}
+.tb-right{display:flex;align-items:center;gap:.7rem}
+.search-box{background:var(--cream);border:1px solid #D8D2C4;border-radius:8px;padding:.45rem .9rem;display:flex;align-items:center;gap:.45rem;font-size:.82rem;color:var(--tm);min-width:200px}
+.search-box input{background:transparent;border:none;outline:none;font-family:'DM Sans',sans-serif;font-size:.82rem;color:var(--tp);width:100%}
+.btn-sm{background:var(--navy);color:#fff;border:none;padding:.5rem 1.1rem;border-radius:7px;font-size:.78rem;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s}
+.btn-sm:hover{background:var(--navy-l)}
+.btn-sm.gold{background:var(--gold);color:var(--navy)}
+.btn-sm.gold:hover{background:var(--gold-l)}
+.btn-sm.red{background:var(--red);color:#fff}
+.content{padding:1.8rem}
+
+/* ── STATS ── */
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:.9rem;margin-bottom:1.8rem}
+.stat-card{background:var(--white);border:1px solid var(--border);border-radius:11px;padding:1.3rem;position:relative;overflow:hidden}
+.stat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--gold)}
+.stat-num{font-family:'Playfair Display',serif;font-size:1.9rem;font-weight:700;color:var(--navy)}
+.stat-lbl{font-size:.75rem;color:var(--tm);margin-top:.2rem}
+.stat-ico{position:absolute;top:1.1rem;right:1.1rem;font-size:1.4rem;opacity:.12}
+
+/* ── CLASS GRID ── */
+.sec-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.1rem}
+.sec-title{font-family:'Playfair Display',serif;font-size:1.2rem;color:var(--navy)}
+.cls-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.1rem;margin-bottom:1.8rem}
+.cls-card{background:var(--white);border:1px solid var(--border);border-radius:13px;overflow:hidden;cursor:pointer;transition:all .2s}
+.cls-card:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(13,27,42,.09);border-color:var(--gold)}
+.cls-banner{height:74px;display:flex;align-items:center;justify-content:center;font-size:2rem}
+.cls-body{padding:1.1rem}
+.cls-code{font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700;margin-bottom:.22rem}
+.cls-name{font-family:'Playfair Display',serif;font-size:.95rem;color:var(--navy);margin-bottom:.22rem;line-height:1.3}
+.cls-prof{font-size:.74rem;color:var(--tm);margin-bottom:.7rem}
+.cls-meta{display:flex;gap:.4rem;flex-wrap:wrap}
+.meta-tag{background:var(--cream-d);color:var(--tm);font-size:.66rem;font-weight:500;padding:.22rem .55rem;border-radius:100px}
+
+/* ── DETAIL HEADER ── */
+.det-hd{background:var(--navy);padding:1.8rem 1.8rem 1.4rem;margin:-1.8rem -1.8rem 1.6rem;position:relative;overflow:hidden}
+.det-hd::after{content:'';position:absolute;bottom:-40px;right:-40px;width:220px;height:220px;background:radial-gradient(circle,rgba(201,168,76,.18) 0%,transparent 70%)}
+.crumb{font-size:.75rem;color:rgba(255,255,255,.37);margin-bottom:.65rem;cursor:pointer;transition:color .15s}
+.crumb:hover{color:var(--gold)}
+.det-code{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:.4rem}
+.det-name{font-family:'Playfair Display',serif;font-size:1.65rem;color:#fff;margin-bottom:.35rem}
+.det-prof{color:rgba(255,255,255,.45);font-size:.85rem}
+
+/* ── TABS ── */
+.tab-bar{display:flex;border-bottom:2px solid var(--border);margin-bottom:1.4rem;overflow-x:auto;gap:0}
+.tab{padding:.68rem 1.1rem;font-size:.82rem;font-weight:500;cursor:pointer;color:var(--tm);border-bottom:2px solid transparent;margin-bottom:-2px;white-space:nowrap;transition:all .14s}
+.tab:hover{color:var(--navy)}
+.tab.act{color:var(--navy);border-bottom-color:var(--gold);font-weight:700}
+
+/* ── MATERIALS ── */
+.mats-list{display:flex;flex-direction:column;gap:.65rem}
+.mat-item{background:var(--white);border:1px solid var(--border);border-radius:9px;padding:.95rem 1.1rem;display:flex;align-items:center;gap:.9rem;transition:all .15s}
+.mat-item:hover{border-color:var(--gold);background:#FFFDF9}
+.f-ico{width:42px;height:42px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:1.05rem;flex-shrink:0}
+.f-pdf{background:#FDEEEE}.f-ppt{background:#FFF0E8}.f-doc{background:#EEF2FF}.f-zip{background:#FFF8E8}.f-vid{background:#F0FFF4}
+.mat-info{flex:1;min-width:0}
+.mat-name{font-size:.87rem;font-weight:600;color:var(--navy);margin-bottom:.18rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mat-meta{font-size:.72rem;color:var(--tl);display:flex;gap:.9rem;flex-wrap:wrap}
+.mat-desc{font-size:.72rem;color:var(--tl);margin-top:.15rem}
+.mat-acts{display:flex;gap:.4rem;flex-shrink:0}
+.ico-btn{width:32px;height:32px;border-radius:7px;border:1px solid var(--border);background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.85rem;transition:all .14s;color:var(--tm)}
+.ico-btn:hover{background:var(--cream);border-color:var(--gold);color:var(--navy)}
+.ico-btn.danger:hover{background:#FDEEEE;border-color:#E74C3C;color:#C0392B}
+
+/* ── UPLOAD ── */
+.upload-zone{border:2px dashed #CCC6B4;border-radius:13px;padding:2.8rem 2rem;text-align:center;cursor:pointer;transition:all .2s;margin-bottom:1.3rem;background:var(--white)}
+.upload-zone:hover,.upload-zone.drag-over{border-color:var(--gold);background:#FFFDF0}
+.up-ico{font-size:2.3rem;margin-bottom:.85rem}
+.up-text{font-size:.95rem;font-weight:500;color:var(--navy);margin-bottom:.35rem}
+.up-hint{font-size:.77rem;color:var(--tl)}
+.up-selected{font-size:.78rem;color:var(--green);margin-top:.5rem;font-weight:600}
+
+/* ── FORM ── */
+.fg{margin-bottom:1.1rem}
+.fg label{display:block;font-size:.76rem;font-weight:600;color:var(--tm);text-transform:uppercase;letter-spacing:.05em;margin-bottom:.42rem}
+.fc{width:100%;background:var(--white);border:1px solid #D4CCB4;border-radius:7px;padding:.65rem .85rem;font-family:'DM Sans',sans-serif;font-size:.87rem;color:var(--tp);outline:none;transition:border-color .2s}
+.fc:focus{border-color:var(--gold)}
+textarea.fc{resize:vertical}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+
+/* ── ANNOUNCEMENTS ── */
+.ann-card{background:var(--white);border:1px solid var(--border);border-left:4px solid var(--gold);border-radius:9px;padding:1.1rem;margin-bottom:.65rem}
+.ann-ttl{font-weight:600;color:var(--navy);margin-bottom:.35rem;font-size:.9rem}
+.ann-body{font-size:.82rem;color:var(--tm);line-height:1.65}
+.ann-meta{font-size:.69rem;color:var(--tl);margin-top:.45rem;display:flex;align-items:center;justify-content:space-between}
+.ann-cls{font-size:.66rem;color:var(--gold);font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:.35rem}
+
+/* ── MODAL ── */
+.overlay{display:none;position:fixed;inset:0;background:rgba(13,27,42,.72);z-index:200;align-items:center;justify-content:center}
+.overlay.open{display:flex}
+.modal{background:var(--white);border-radius:15px;padding:1.8rem;width:100%;max-width:480px;margin:1rem;max-height:90vh;overflow-y:auto}
+.modal-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.4rem}
+.modal-title{font-family:'Playfair Display',serif;font-size:1.2rem;color:var(--navy)}
+.modal-x{background:var(--cream);border:none;width:30px;height:30px;border-radius:50%;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;color:var(--tm);transition:all .14s}
+.modal-x:hover{background:#FDEEEE;color:#C0392B}
+
+/* ── TOAST ── */
+.toast{position:fixed;bottom:1.8rem;right:1.8rem;background:var(--navy);color:#fff;padding:.85rem 1.4rem;border-radius:9px;font-size:.82rem;font-weight:500;border-left:4px solid var(--gold);z-index:300;transform:translateY(80px);opacity:0;transition:all .28s;max-width:340px}
+.toast.show{transform:translateY(0);opacity:1}
+.toast.err{border-left-color:var(--red)}
+
+/* ── EMPTY ── */
+.empty{text-align:center;padding:3.5rem 2rem;color:var(--tl)}
+.empty-ico{font-size:2.6rem;margin-bottom:.85rem;opacity:.38}
+.empty h3{font-size:.9rem;color:var(--tm);margin-bottom:.4rem}
+.empty p{font-size:.8rem}
+
+/* ── PROGRESS ── */
+.prog-bar{background:#E8E2D6;border-radius:100px;height:4px;overflow:hidden;margin-top:.35rem}
+.prog-fill{height:100%;background:var(--gold);border-radius:100px;transition:width .4s}
+
+/* ── PROFILE CARD ── */
+.profile-card{background:var(--white);border:1px solid var(--border);border-radius:13px;padding:1.8rem;max-width:500px}
+
+/* ── LOADING ── */
+.spinner{width:36px;height:36px;border:3px solid rgba(201,168,76,.2);border-top-color:var(--gold);border-radius:50%;animation:spin .7s linear infinite;margin:3rem auto}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ── ENROLL MODAL ── */
+.enroll-list{display:flex;flex-direction:column;gap:.5rem;max-height:360px;overflow-y:auto}
+.enroll-item{background:var(--cream);border:1px solid var(--border);border-radius:8px;padding:.85rem 1rem;display:flex;align-items:center;justify-content:space-between;cursor:pointer;transition:all .14s}
+.enroll-item:hover{border-color:var(--gold)}
+.enroll-item.enrolled{border-color:var(--green);background:#F0FFF4}
+
+@media(max-width:768px){
+  .sidebar{position:relative;width:100%;height:auto}
+  .main{margin-left:0}
+  .feat-grid{grid-template-columns:1fr}
+  .two-col{grid-template-columns:1fr}
+  .l-nav{padding:1rem 1.5rem}
+  .cls-grid{grid-template-columns:1fr}
+}
+
+/* ── ENROLLMENT REQUESTS ── */
+.req-item{background:var(--white);border:1px solid var(--border);border-radius:9px;padding:.95rem 1.1rem;display:flex;align-items:center;gap:.9rem;margin-bottom:.6rem;transition:all .15s}
+.req-item:hover{border-color:var(--gold)}
+.req-avatar{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#4A90D9,#1A5FA8);display:flex;align-items:center;justify-content:center;font-size:.78rem;font-weight:700;color:#fff;flex-shrink:0}
+.req-info{flex:1;min-width:0}
+.req-name{font-size:.87rem;font-weight:600;color:var(--navy);margin-bottom:.15rem}
+.req-meta{font-size:.72rem;color:var(--tl);display:flex;gap:.7rem;flex-wrap:wrap}
+.req-acts{display:flex;gap:.4rem;flex-shrink:0}
+.btn-approve{background:#EAF3DE;color:#1A7A4A;border:1px solid #97C459;padding:.38rem .9rem;border-radius:6px;font-size:.75rem;font-weight:600;cursor:pointer;transition:all .14s}
+.btn-approve:hover{background:#1A7A4A;color:#fff}
+.btn-reject{background:#FDEEEE;color:#C0392B;border:1px solid #E74C3C;padding:.38rem .9rem;border-radius:6px;font-size:.75rem;font-weight:600;cursor:pointer;transition:all .14s}
+.btn-reject:hover{background:#C0392B;color:#fff}
+.status-badge{font-size:.7rem;font-weight:700;padding:.22rem .7rem;border-radius:100px;letter-spacing:.04em}
+.status-pending{background:#FFF8E8;color:#854F0B;border:1px solid #EF9F27}
+.status-approved{background:#EAF3DE;color:#1A7A4A;border:1px solid #639922}
+.status-rejected{background:#FDEEEE;color:#C0392B;border:1px solid #E24B4A}
+.notif-dot{width:8px;height:8px;background:#C0392B;border-radius:50%;display:inline-block;margin-left:4px;vertical-align:middle}
+
+</style>
+</head>
+<body>
+
+<!-- ═══════════ LANDING ═══════════ -->
+<div id="pg-land" class="pg flex-on">
+  <nav class="l-nav">
+    <div class="logo"><div class="logo-box">◈</div> ClassVault</div>
+    <div style="display:flex;gap:.7rem">
+      <button class="btn-o" onclick="goto('role')">Sign In</button>
+      <button class="btn-p" onclick="goto('role')">Get Started</button>
+    </div>
+  </nav>
+  <div class="l-hero">
+    <div class="l-badge">✦ Premium Academic Portal</div>
+    <h1 class="l-h1">Where Knowledge<br><span>Gets Shared</span></h1>
+    <p class="l-sub">A unified portal for faculty to upload course materials and students to access everything — organised, searchable, and always available.</p>
+    <div class="hero-btns">
+      <button class="btn-p" onclick="goto('role')">Enter Portal →</button>
+      <button class="btn-o" onclick="quickDemo()">Quick Demo</button>
+    </div>
+    <div class="feat-grid">
+      <div class="feat-card"><div class="feat-icon">📂</div><h3>Organised Materials</h3><p>Syllabus, lessons, model QPs, references — all categorised and searchable in one place</p></div>
+      <div class="feat-card"><div class="feat-icon">⚡</div><h3>Instant Downloads</h3><p>Students download files directly. Faculty upload in seconds with drag & drop</p></div>
+      <div class="feat-card"><div class="feat-icon">🔔</div><h3>Live Announcements</h3><p>Faculty post updates; students get notified. No email needed.</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ ROLE ═══════════ -->
+<div id="pg-role" class="pg flex-on" style="background:var(--navy);min-height:100vh;flex-direction:column;align-items:center;justify-content:center;padding:2rem;position:relative">
+  <button class="btn-o" style="position:absolute;top:1.5rem;left:1.5rem;padding:.45rem 1rem;font-size:.8rem" onclick="goto('land')">← Back</button>
+  <div style="font-family:'Playfair Display',serif;font-size:1.2rem;color:var(--gold);margin-bottom:2.2rem">◈ ClassVault</div>
+  <h2 style="font-family:'Playfair Display',serif;font-size:2rem;color:#fff;text-align:center;margin-bottom:.5rem">Who are you?</h2>
+  <p style="color:rgba(255,255,255,.38);text-align:center;font-size:.88rem;margin-bottom:2.5rem">Choose your role to continue to the portal</p>
+  <div class="role-cards">
+    <div class="r-card" onclick="setRole('faculty')">
+      <div class="r-icon">👨‍🏫</div>
+      <h3>Faculty</h3>
+      <p>Upload materials, manage classrooms & post announcements</p>
+    </div>
+    <div class="r-card" onclick="setRole('student')">
+      <div class="r-icon">🎓</div>
+      <h3>Student</h3>
+      <p>Access course materials, download files & stay updated</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ AUTH ═══════════ -->
+<div id="pg-auth" class="pg flex-on">
+  <button class="btn-o" style="position:absolute;top:1.5rem;left:1.5rem;padding:.45rem 1rem;font-size:.8rem" onclick="goto('role')">← Back</button>
+  <div class="auth-card">
+    <div class="auth-logo">◈ ClassVault</div>
+    <div class="auth-badge" id="auth-badge">Faculty Portal</div>
+    <div id="auth-err" class="auth-err"></div>
+
+    <!-- LOGIN FORM -->
+    <div id="auth-login">
+      <h2 class="auth-title">Welcome Back</h2>
+      <p class="auth-sub">Sign in to your account</p>
+      <div class="field"><label>Email Address</label><input type="email" id="a-email" placeholder="you@university.edu" onkeydown="if(event.key==='Enter')doLogin()"></div>
+      <div class="field"><label>Password</label><input type="password" id="a-pass" placeholder="••••••••" onkeydown="if(event.key==='Enter')doLogin()"></div>
+      <button class="auth-btn" onclick="doLogin()">Sign In →</button>
+      <p class="auth-hint">Demo: <span onclick="fillDemo()">use demo credentials</span></p>
+      <p class="auth-toggle">Don't have an account? <span onclick="toggleRegister(true)">Register here</span></p>
+    </div>
+
+    <!-- REGISTER FORM -->
+    <div id="auth-reg" style="display:none">
+      <h2 class="auth-title">Create Account</h2>
+      <p class="auth-sub">Join ClassVault today</p>
+      <div class="field"><label>Full Name</label><input type="text" id="r-name" placeholder="Dr. / Mr. / Ms. …"></div>
+      <div class="field"><label>Email Address</label><input type="email" id="r-email" placeholder="you@university.edu"></div>
+      <div class="field"><label>Password</label><input type="password" id="r-pass" placeholder="Choose a strong password"></div>
+      <div class="field"><label>Department</label><input type="text" id="r-dept" placeholder="e.g. Computer Science"></div>
+      <button class="auth-btn" onclick="doRegister()">Create Account →</button>
+      <p class="auth-toggle">Already have an account? <span onclick="toggleRegister(false)">Sign in</span></p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ FACULTY APP ═══════════ -->
+<div id="pg-faculty" class="pg">
+<div class="shell">
+  <aside class="sidebar">
+    <div class="sb-head">
+      <div class="sb-logo">◈ ClassVault</div>
+      <div class="sb-pill">Faculty</div>
+    </div>
+    <div class="sb-user">
+      <div class="avatar av-gold" id="fac-av">DR</div>
+      <div style="flex:1;min-width:0">
+        <div class="u-name" id="fac-name">Loading…</div>
+        <div class="u-email" id="fac-email"></div>
+      </div>
+    </div>
+    <div class="nav-sec">
+      <div class="nav-lbl">Main</div>
+      <div class="nav-it act" data-sec="dashboard" onclick="fNav('dashboard',this)"><span class="nav-icon">🏠</span> Dashboard</div>
+      <div class="nav-it" data-sec="classrooms" onclick="fNav('classrooms',this)"><span class="nav-icon">📚</span> My Classrooms</div>
+      <div class="nav-it" data-sec="upload" onclick="fNav('upload',this)"><span class="nav-icon">⬆️</span> Upload Material</div>
+      <div class="nav-it" data-sec="announcements" onclick="fNav('announcements',this)"><span class="nav-icon">📢</span> Announcements</div>
+      <div class="nav-it" data-sec="requests" onclick="fNav('requests',this)"><span class="nav-icon">📬</span> Enrollment Requests <span class="badge" id="f-req-badge" style="display:none">0</span></div>
+      <div class="nav-lbl" style="margin-top:.85rem">Account</div>
+      <div class="nav-it" data-sec="profile" onclick="fNav('profile',this)"><span class="nav-icon">⚙️</span> Profile</div>
+    </div>
+    <div class="sb-foot"><button class="logout-btn" onclick="logout()">Sign Out</button></div>
+  </aside>
+
+  <div class="main">
+    <div class="topbar">
+      <div class="tb-title" id="f-tb-title">Dashboard</div>
+      <div class="tb-right">
+        <div class="search-box"><span>🔍</span><input type="text" placeholder="Search…" oninput="fSearch(this.value)" id="f-search-inp"></div>
+        <button class="btn-sm gold" onclick="openModal('mo-cls')">+ New Class</button>
+      </div>
+    </div>
+
+    <!-- DASHBOARD -->
+    <div class="content" id="f-sec-dashboard">
+      <div class="stats-grid">
+        <div class="stat-card"><div class="stat-num" id="fs-cls">–</div><div class="stat-lbl">Active Classrooms</div><div class="stat-ico">📚</div></div>
+        <div class="stat-card"><div class="stat-num" id="fs-files">–</div><div class="stat-lbl">Files Uploaded</div><div class="stat-ico">📁</div></div>
+        <div class="stat-card"><div class="stat-num" id="fs-stu">–</div><div class="stat-lbl">Total Students</div><div class="stat-ico">🎓</div></div>
+        <div class="stat-card"><div class="stat-num" id="fs-ann">–</div><div class="stat-lbl">Announcements</div><div class="stat-ico">📢</div></div>
+      </div>
+      <div class="sec-hd"><div class="sec-title">My Classrooms</div></div>
+      <div class="cls-grid" id="f-cls-grid"></div>
+    </div>
+
+    <!-- CLASSROOMS -->
+    <div class="content" id="f-sec-classrooms" style="display:none">
+      <div class="sec-hd">
+        <div class="sec-title">All Classrooms</div>
+        <button class="btn-sm gold" onclick="openModal('mo-cls')">+ Create Classroom</button>
+      </div>
+      <div class="cls-grid" id="f-cls-grid2"></div>
+    </div>
+
+    <!-- CLASSROOM DETAIL -->
+    <div id="f-sec-detail" style="display:none">
+      <div class="content">
+        <div class="det-hd">
+          <div class="crumb" onclick="fNav('classrooms',null)">← Back to Classrooms</div>
+          <div class="det-code" id="f-det-code"></div>
+          <div class="det-name" id="f-det-name"></div>
+          <div class="det-prof" id="f-det-prof"></div>
+          <button onclick="deleteClassroom()" style="margin-top:.8rem;background:rgba(192,57,43,.18);color:#E74C3C;border:1px solid rgba(192,57,43,.4);padding:.42rem 1.1rem;border-radius:7px;font-size:.78rem;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s" onmouseover="this.style.background='rgba(192,57,43,.35)'" onmouseout="this.style.background='rgba(192,57,43,.18)'">🗑 Remove Course</button>
+        </div>
+        <div class="tab-bar">
+          <div class="tab act" onclick="switchTab(this,'f-tab-mats')">📄 Materials</div>
+          <div class="tab" onclick="switchTab(this,'f-tab-upload')">⬆️ Upload</div>
+          <div class="tab" onclick="switchTab(this,'f-tab-ann')">📢 Announcements</div>
+          <div class="tab" onclick="switchTab(this,'f-tab-students');loadFStudents(selectedCls)">👥 Students</div>
+        </div>
+
+        <div id="f-tab-mats">
+          <div class="sec-hd" style="margin-bottom:.85rem"><div class="sec-title" style="font-size:1rem">Uploaded Materials</div></div>
+          <div id="f-mats-list" class="mats-list"></div>
+        </div>
+
+        <div id="f-tab-upload" style="display:none">
+          <div class="upload-zone" id="f-dz" onclick="document.getElementById('f-file').click()"
+            ondragover="event.preventDefault();this.classList.add('drag-over')"
+            ondrop="handleDrop(event,'f')" ondragleave="this.classList.remove('drag-over')">
+            <div class="up-ico">☁️</div>
+            <div class="up-text">Drag & drop files here</div>
+            <div class="up-hint">PDF, PPT, DOC, ZIP, MP4 — up to 100 MB</div>
+            <div class="up-selected" id="f-sel-file" style="display:none"></div>
+            <input type="file" id="f-file" style="display:none" multiple onchange="onFileSelect(this,'f')">
+          </div>
+          <div class="two-col">
+            <div class="fg"><label>Category</label>
+              <select class="fc" id="f-cat"><option>Syllabus</option><option>Lessons</option><option>Projects</option><option>Model QPs</option><option>References</option><option>Textbooks</option><option>Videos</option><option>Other</option></select>
+            </div>
+            <div class="fg"><label>Display Name (optional)</label><input type="text" class="fc" id="f-disp" placeholder="Override filename…"></div>
+          </div>
+          <div class="fg"><label>Description</label><input type="text" class="fc" id="f-desc" placeholder="Brief description of this material…"></div>
+          <button class="btn-sm gold" style="padding:.65rem 1.8rem;font-size:.88rem" onclick="doUpload()">Upload File →</button>
+        </div>
+
+        <div id="f-tab-students" style="display:none">
+          <div class="sec-hd" style="margin-bottom:.85rem">
+            <div class="sec-title" style="font-size:1rem">Enrolled Students</div>
+          </div>
+          <div id="f-students-list"></div>
+        </div>
+
+        <div id="f-tab-ann" style="display:none">
+          <div style="background:var(--white);border:1px solid var(--border);border-radius:11px;padding:1.4rem;margin-bottom:1.3rem">
+            <div class="fg"><label>Title</label><input type="text" class="fc" id="ann-title" placeholder="e.g. Assignment 2 deadline extended"></div>
+            <div class="fg"><label>Message</label><textarea class="fc" id="ann-body" rows="3" placeholder="Write your announcement…"></textarea></div>
+            <button class="btn-sm gold" style="padding:.6rem 1.4rem" onclick="postAnn()">Post Announcement</button>
+          </div>
+          <div id="f-ann-list"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- UPLOAD PAGE -->
+    <div class="content" id="f-sec-upload" style="display:none">
+      <div class="sec-hd"><div class="sec-title">Upload Material</div></div>
+      <div style="max-width:560px">
+        <div class="fg"><label>Select Classroom</label><select class="fc" id="g-cls-sel"></select></div>
+        <div class="upload-zone" id="g-dz" onclick="document.getElementById('g-file').click()"
+          ondragover="event.preventDefault();this.classList.add('drag-over')"
+          ondrop="handleDrop(event,'g')" ondragleave="this.classList.remove('drag-over')">
+          <div class="up-ico">📤</div>
+          <div class="up-text">Click or drag to upload</div>
+          <div class="up-hint">PDF, PPT, DOC, ZIP, MP4 — up to 100 MB</div>
+          <div class="up-selected" id="g-sel-file" style="display:none"></div>
+          <input type="file" id="g-file" style="display:none" multiple onchange="onFileSelect(this,'g')">
+        </div>
+        <div class="two-col">
+          <div class="fg"><label>Category</label>
+            <select class="fc" id="g-cat"><option>Syllabus</option><option>Lessons</option><option>Projects</option><option>Model QPs</option><option>References</option><option>Textbooks</option><option>Videos</option><option>Other</option></select>
+          </div>
+          <div class="fg"><label>Display Name (optional)</label><input type="text" class="fc" id="g-disp" placeholder="Override filename…"></div>
+        </div>
+        <div class="fg"><label>Description</label><input type="text" class="fc" id="g-desc" placeholder="Brief description…"></div>
+        <button class="btn-sm gold" style="padding:.65rem 2rem;font-size:.88rem" onclick="doUploadGlobal()">Upload File →</button>
+      </div>
+    </div>
+
+    <!-- ANNOUNCEMENTS PAGE -->
+    <div class="content" id="f-sec-announcements" style="display:none">
+      <div class="sec-hd"><div class="sec-title">All Announcements</div></div>
+      <div id="f-all-ann"></div>
+    </div>
+
+    <!-- ENROLLMENT REQUESTS -->
+    <div class="content" id="f-sec-requests" style="display:none">
+      <div class="sec-hd"><div class="sec-title">Enrollment Requests</div></div>
+      <div id="f-req-tabs" style="display:flex;gap:.5rem;margin-bottom:1.2rem;flex-wrap:wrap">
+        <button class="btn-sm gold" onclick="filterReqs('pending',this)" id="req-tab-pending">⏳ Pending</button>
+        <button class="btn-sm" onclick="filterReqs('approved',this)" id="req-tab-approved">✓ Approved</button>
+        <button class="btn-sm" onclick="filterReqs('rejected',this)" id="req-tab-rejected">✕ Rejected</button>
+        <button class="btn-sm" onclick="filterReqs('all',this)" id="req-tab-all">All</button>
+      </div>
+      <div id="f-req-list"></div>
+    </div>
+
+    <!-- PROFILE -->
+    <div class="content" id="f-sec-profile" style="display:none">
+      <div class="profile-card">
+        <div style="font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--navy);margin-bottom:1.3rem">Profile Settings</div>
+        <div class="fg"><label>Full Name</label><input type="text" class="fc" id="prof-name" oninput="updateAvatar(this.value,'fac-av')"></div>
+        <div class="fg"><label>Email</label><input type="text" class="fc" id="prof-email" readonly style="opacity:.55"></div>
+        <div class="fg"><label>Department</label><input type="text" class="fc" id="prof-dept"></div>
+        <button class="btn-sm gold" style="padding:.6rem 1.6rem" onclick="saveProfile()">Save Changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ═══════════ STUDENT APP ═══════════ -->
+<div id="pg-student" class="pg">
+<div class="shell">
+  <aside class="sidebar">
+    <div class="sb-head">
+      <div class="sb-logo">◈ ClassVault</div>
+      <div class="sb-pill">Student</div>
+    </div>
+    <div class="sb-user">
+      <div class="avatar av-blue" id="stu-av">ST</div>
+      <div style="flex:1;min-width:0">
+        <div class="u-name" id="stu-name">Loading…</div>
+        <div class="u-email" id="stu-email"></div>
+      </div>
+    </div>
+    <div class="nav-sec">
+      <div class="nav-lbl">Main</div>
+      <div class="nav-it act" onclick="sNav('dashboard',this)"><span class="nav-icon">🏠</span> Dashboard</div>
+      <div class="nav-it" onclick="sNav('classrooms',this)"><span class="nav-icon">📚</span> My Courses</div>
+      <div class="nav-it" onclick="sNav('announcements',this)"><span class="nav-icon">🔔</span> Updates <span class="badge" id="s-ann-badge" style="display:none">!</span></div>
+      <div class="nav-it" onclick="sNav('downloads',this)"><span class="nav-icon">⬇️</span> Downloads</div>
+      <div class="nav-lbl" style="margin-top:.85rem">Courses</div>
+      <div class="nav-it" onclick="openModal('mo-enroll')"><span class="nav-icon">➕</span> Join Course</div>
+      <div class="nav-it" onclick="sNav('my-requests',this)"><span class="nav-icon">📋</span> My Requests <span class="badge" id="s-req-badge" style="display:none">!</span></div>
+    </div>
+    <div class="sb-foot"><button class="logout-btn" onclick="logout()">Sign Out</button></div>
+  </aside>
+
+  <div class="main">
+    <div class="topbar">
+      <div class="tb-title" id="s-tb-title">Dashboard</div>
+      <div class="tb-right">
+        <div class="search-box"><span>🔍</span><input type="text" placeholder="Search materials…" oninput="sSearch(this.value)"></div>
+      </div>
+    </div>
+
+    <!-- DASHBOARD -->
+    <div class="content" id="s-sec-dashboard">
+      <div class="stats-grid">
+        <div class="stat-card"><div class="stat-num" id="ss-cls">–</div><div class="stat-lbl">Enrolled Courses</div><div class="stat-ico">📚</div></div>
+        <div class="stat-card"><div class="stat-num" id="ss-files">–</div><div class="stat-lbl">Available Files</div><div class="stat-ico">📁</div></div>
+        <div class="stat-card"><div class="stat-num" id="ss-dl">–</div><div class="stat-lbl">Files Downloaded</div><div class="stat-ico">⬇️</div></div>
+        <div class="stat-card"><div class="stat-num" id="ss-ann">–</div><div class="stat-lbl">Course Updates</div><div class="stat-ico">🔔</div></div>
+      </div>
+      <div class="sec-hd"><div class="sec-title">My Courses</div><button class="btn-sm" onclick="openModal('mo-enroll')">+ Join Course</button></div>
+      <div class="cls-grid" id="s-cls-grid"></div>
+    </div>
+
+    <!-- CLASSROOMS -->
+    <div class="content" id="s-sec-classrooms" style="display:none">
+      <div class="sec-hd"><div class="sec-title">All Courses</div><button class="btn-sm" onclick="openModal('mo-enroll')">+ Join Course</button></div>
+      <div class="cls-grid" id="s-cls-grid2"></div>
+    </div>
+
+    <!-- CLASSROOM DETAIL -->
+    <div id="s-sec-detail" style="display:none">
+      <div class="content">
+        <div class="det-hd">
+          <div class="crumb" onclick="sNav('classrooms',null)">← Back to Courses</div>
+          <div class="det-code" id="s-det-code"></div>
+          <div class="det-name" id="s-det-name"></div>
+          <div class="det-prof" id="s-det-prof"></div>
+        </div>
+        <div class="tab-bar" id="s-tabs"></div>
+        <div id="s-mats-container"></div>
+      </div>
+    </div>
+
+    <!-- ANNOUNCEMENTS -->
+    <div class="content" id="s-sec-announcements" style="display:none">
+      <div class="sec-hd"><div class="sec-title">Course Updates</div></div>
+      <div id="s-ann-page"></div>
+    </div>
+
+    <!-- MY REQUESTS -->
+    <div class="content" id="s-sec-my-requests" style="display:none">
+      <div class="sec-hd"><div class="sec-title">My Enrollment Requests</div></div>
+      <div id="s-my-req-list"></div>
+    </div>
+
+    <!-- DOWNLOADS -->
+    <div class="content" id="s-sec-downloads" style="display:none">
+      <div class="sec-hd"><div class="sec-title">Download History</div></div>
+      <div id="s-dl-list"><div class="empty"><div class="empty-ico">⬇️</div><h3>No downloads yet</h3><p>Files you download will appear here</p></div></div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ═══════════ MODALS ═══════════ -->
+<!-- Create Classroom -->
+<div class="overlay" id="mo-cls">
+  <div class="modal">
+    <div class="modal-hd"><div class="modal-title">Create Classroom</div><button class="modal-x" onclick="closeModal('mo-cls')">✕</button></div>
+    <div class="fg"><label>Course Code</label><input type="text" class="fc" id="nc-code" placeholder="e.g. CS401"></div>
+    <div class="fg"><label>Course Name</label><input type="text" class="fc" id="nc-name" placeholder="e.g. Machine Learning Fundamentals"></div>
+    <div class="fg"><label>Semester</label>
+      <select class="fc" id="nc-sem"><option>Sem 1</option><option>Sem 2</option><option>Sem 3</option><option>Sem 4</option><option>Sem 5</option><option>Sem 6</option><option>Sem 7</option><option>Sem 8</option></select>
+    </div>
+    <div class="fg"><label>Section</label><input type="text" class="fc" id="nc-sec" placeholder="e.g. A, B, ALL"></div>
+    <button class="btn-sm gold" style="width:100%;padding:.7rem;font-size:.88rem;margin-top:.3rem" onclick="createClass()">Create Classroom →</button>
+  </div>
+</div>
+
+<!-- Enroll -->
+<div class="overlay" id="mo-enroll">
+  <div class="modal">
+    <div class="modal-hd"><div class="modal-title">Join a Course</div><button class="modal-x" onclick="closeModal('mo-enroll')">✕</button></div>
+    <p style="font-size:.82rem;color:var(--tm);margin-bottom:1rem">Select a classroom to enroll in:</p>
+    <div class="enroll-list" id="enroll-list"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ═══════════════════════════════════════════════
+//  STATE
+// ═══════════════════════════════════════════════
+const API = '';  // same origin
+let token = localStorage.getItem('cv_token') || null;
+let currentUser = JSON.parse(localStorage.getItem('cv_user') || 'null');
+let currentRole = 'student';
+let selectedCls = null;
+let selectedFiles = {};   // key -> FileList
+let allClassrooms = [];
+
+const BANNERS = [
+  {bg:'#1A3F6B',emoji:'🖥️'},{bg:'#1A6B3F',emoji:'🧪'},{bg:'#5B1A8C',emoji:'📡'},
+  {bg:'#8C3D1A',emoji:'⚛️'},{bg:'#1A5C6B',emoji:'🔬'},{bg:'#6B1A4D',emoji:'📐'},
+];
+const CATS = ['Syllabus','Lessons','Projects','Model QPs','References','Textbooks','Videos','Other'];
+const CAT_ICO = {Syllabus:'📋',Lessons:'📖',Projects:'🛠️','Model QPs':'📝',References:'🔗',Textbooks:'📕',Videos:'🎬',Other:'📂'};
+const FILE_ICO = {pdf:'📄',ppt:'📊',doc:'📝',zip:'🗜️',vid:'🎬'};
+
+// ═══════════════════════════════════════════════
+//  HELPERS
+// ═══════════════════════════════════════════════
+async function api(method, path, body, isForm=false) {
+  const opts = {method, headers: {'Authorization': `Bearer ${token||''}`}};
+  if (body && !isForm) { opts.headers['Content-Type'] = 'application/json'; opts.body = JSON.stringify(body); }
+  if (isForm) opts.body = body;
+  const res = await fetch(API + path, opts);
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) throw new Error(data.error || res.statusText);
+  return data;
+}
+
+function goto(id) {
+  document.querySelectorAll('.pg').forEach(p => { p.classList.remove('on','flex-on'); });
+  const el = document.getElementById('pg-'+id);
+  const needsFlex = ['land','role','auth'].includes(id);
+  el.classList.add(needsFlex ? 'flex-on' : 'on');
+}
+
+function toast(msg, isErr=false) {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.className = 'toast show' + (isErr ? ' err' : '');
+  clearTimeout(window._toastT);
+  window._toastT = setTimeout(() => el.classList.remove('show'), 3200);
+}
+
+function openModal(id) { document.getElementById(id).classList.add('open'); }
+function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+document.querySelectorAll('.overlay').forEach(m => m.addEventListener('click', e => { if(e.target===m) m.classList.remove('open'); }));
+
+function avatarInitials(name) {
+  if (!name) return '??';
+  return name.trim().split(/\s+/).filter(Boolean).slice(-2).map(w=>w[0]).join('').toUpperCase();
+}
+
+function updateAvatar(val, avId) {
+  const el = document.getElementById(avId);
+  if (el) el.textContent = avatarInitials(val);
+  const ni = document.getElementById('fac-name');
+  if (ni && avId==='fac-av') ni.textContent = val;
+}
+
+function clsCard(cls, role) {
+  const b = BANNERS[cls.banner % BANNERS.length];
+  const fn = role==='faculty' ? `fOpenCls(${cls.id})` : `sOpenCls(${cls.id})`;
+  return `<div class="cls-card" onclick="${fn}">
+    <div class="cls-banner" style="background:${b.bg}">${b.emoji}</div>
+    <div class="cls-body">
+      <div class="cls-code" style="color:${b.bg}">${cls.code}</div>
+      <div class="cls-name">${cls.name}</div>
+      <div class="cls-prof">${cls.prof||'Unknown'}</div>
+      <div class="cls-meta">
+        <span class="meta-tag">${cls.sem}</span>
+        <span class="meta-tag">Sec ${cls.section}</span>
+        <span class="meta-tag">${cls.materialCount||0} files</span>
+        <span class="meta-tag">${cls.studentCount||0} students</span>
+      </div>
+    </div>
+  </div>`;
+}
+
+function matItem(m, role) {
+  const ico = FILE_ICO[m.filetype]||'📄';
+  const clsIco = `f-${m.filetype}`;
+  const acts = role==='faculty'
+    ? `<button class="ico-btn danger" onclick="deleteMat(${m.id})" title="Delete">🗑️</button>`
+    : `<button class="ico-btn" onclick="dlFile(${m.id},'${escStr(m.displayName)}')" title="Download">⬇️</button>
+       <a class="ico-btn" href="${API}/api/materials/${m.id}/download" target="_blank" title="Open" style="display:flex;align-items:center;justify-content:center">👁️</a>`;
+  return `<div class="mat-item" id="mat-${m.id}">
+    <div class="f-ico ${clsIco}">${ico}</div>
+    <div class="mat-info">
+      <div class="mat-name">${m.displayName}</div>
+      <div class="mat-meta"><span>📁 ${m.category}</span><span>📅 ${m.date}</span><span>📦 ${m.size}</span></div>
+      ${m.description ? `<div class="mat-desc">${m.description}</div>` : ''}
+    </div>
+    <div class="mat-acts">${acts}</div>
+  </div>`;
+}
+
+function escStr(s) { return s ? s.replace(/'/g,"\\'").replace(/"/g,'&quot;') : ''; }
+
+function annCard(a, showCls=false) {
+  return `<div class="ann-card">
+    ${showCls ? `<div class="ann-cls">${a.classCode||''}</div>` : ''}
+    <div class="ann-ttl">${a.title}</div>
+    <div class="ann-body">${a.body}</div>
+    <div class="ann-meta"><span>By ${a.author} · ${a.date}</span>
+      ${currentUser&&currentUser.role==='faculty'?`<button class="ico-btn danger" onclick="deleteAnn(${a.id})" style="width:26px;height:26px">🗑️</button>`:''}
+    </div>
+  </div>`;
+}
+
+function spinner() { return '<div class="spinner"></div>'; }
+
+function switchTab(el, tabId) {
+  const bar = el.closest('.tab-bar');
+  bar.querySelectorAll('.tab').forEach(t=>t.classList.remove('act'));
+  el.classList.add('act');
+  const prefix = tabId.replace(/-[^-]+$/,'');
+  document.querySelectorAll(`[id^="${prefix}-"]`).forEach(d=>{ if(d!==bar) d.style.display='none'; });
+  document.getElementById(tabId).style.display='block';
+}
+
+// ═══════════════════════════════════════════════
+//  AUTH
+// ═══════════════════════════════════════════════
+function setRole(role) { currentRole = role; document.getElementById('auth-badge').textContent = role==='faculty' ? 'Faculty Portal' : 'Student Portal'; goto('auth'); }
+function toggleRegister(show) { document.getElementById('auth-login').style.display=show?'none':'block'; document.getElementById('auth-reg').style.display=show?'block':'none'; }
+function showErr(msg) { const e=document.getElementById('auth-err'); e.textContent=msg; e.style.display='block'; }
+function hideErr() { document.getElementById('auth-err').style.display='none'; }
+
+function fillDemo() {
+  document.getElementById('a-email').value = currentRole==='faculty' ? 'faculty@university.edu' : 'student@university.edu';
+  document.getElementById('a-pass').value = currentRole==='faculty' ? 'faculty123' : 'student123';
+}
+
+async function doLogin() {
+  hideErr();
+  const email = document.getElementById('a-email').value.trim();
+  const pass = document.getElementById('a-pass').value;
+  if (!email || !pass) return showErr('Please enter email and password');
+  try {
+    const data = await api('POST', '/api/auth/login', {email, password: pass});
+    token = data.token;
+    currentUser = data.user;
+    localStorage.setItem('cv_token', token);
+    localStorage.setItem('cv_user', JSON.stringify(currentUser));
+    enterApp();
+  } catch(e) { showErr(e.message); }
+}
+
+async function doRegister() {
+  hideErr();
+  const name = document.getElementById('r-name').value.trim();
+  const email = document.getElementById('r-email').value.trim();
+  const pass = document.getElementById('r-pass').value;
+  const dept = document.getElementById('r-dept').value.trim();
+  if (!name||!email||!pass) return showErr('Please fill in all fields');
+  try {
+    const data = await api('POST', '/api/auth/register', {name, email, password: pass, role: currentRole, dept});
+    token = data.token;
+    currentUser = data.user;
+    localStorage.setItem('cv_token', token);
+    localStorage.setItem('cv_user', JSON.stringify(currentUser));
+    enterApp();
+  } catch(e) { showErr(e.message); }
+}
+
+function enterApp() {
+  if (currentUser.role === 'faculty') { goto('faculty'); initFaculty(); }
+  else { goto('student'); initStudent(); }
+}
+
+function logout() {
+  api('POST', '/api/auth/logout').catch(()=>{});
+  token = null; currentUser = null;
+  localStorage.removeItem('cv_token'); localStorage.removeItem('cv_user');
+  goto('land');
+}
+
+function quickDemo() { currentRole='student'; document.getElementById('a-email').value='student@university.edu'; document.getElementById('a-pass').value='student123'; goto('auth'); doLogin(); }
+
+// Auto-login if token saved
+if (token && currentUser) { setTimeout(() => { goto(currentUser.role==='faculty'?'faculty':'student'); if(currentUser.role==='faculty') initFaculty(); else initStudent(); }, 100); }
+
+// ═══════════════════════════════════════════════
+//  FACULTY
+// ═══════════════════════════════════════════════
+async function initFaculty() {
+  document.getElementById('fac-name').textContent = currentUser.name;
+  document.getElementById('fac-email').textContent = currentUser.email;
+  document.getElementById('fac-av').textContent = avatarInitials(currentUser.name);
+  document.getElementById('prof-name').value = currentUser.name;
+  document.getElementById('prof-email').value = currentUser.email;
+  document.getElementById('prof-dept').value = currentUser.dept||'';
+  fNav('dashboard', document.querySelector('#pg-faculty .nav-it[data-sec="dashboard"]'));
+}
+
+function fNav(sec, el) {
+  document.querySelectorAll('#pg-faculty .nav-it').forEach(n=>n.classList.remove('act'));
+  if(el) el.classList.add('act');
+  const secs = ['dashboard','classrooms','upload','announcements','profile','detail','requests'];
+  secs.forEach(s=>{ const e=document.getElementById('f-sec-'+s); if(e) e.style.display='none'; });
+  document.getElementById('f-tab-mats')&&(document.getElementById('f-tab-mats').style.display='block');
+  document.getElementById('f-tab-upload')&&(document.getElementById('f-tab-upload').style.display='none');
+  document.getElementById('f-tab-ann')&&(document.getElementById('f-tab-ann').style.display='none');
+  document.getElementById('f-tab-students')&&(document.getElementById('f-tab-students').style.display='none');
+  document.querySelectorAll('#pg-faculty .det-hd ~ .tab-bar .tab').forEach((t,i)=>t.classList.toggle('act',i===0));
+  document.getElementById('f-tb-title').textContent = {dashboard:'Dashboard',classrooms:'My Classrooms',upload:'Upload Material',announcements:'Announcements',profile:'Profile',requests:'Enrollment Requests'}[sec]||sec;
+  if(sec==='dashboard') { loadFStats(); loadFClsGrid('f-cls-grid'); document.getElementById('f-sec-dashboard').style.display='block'; }
+  else if(sec==='classrooms') { loadFClsGrid('f-cls-grid2'); document.getElementById('f-sec-classrooms').style.display='block'; }
+  else if(sec==='upload') { loadFClsSelect(); document.getElementById('f-sec-upload').style.display='block'; }
+  else if(sec==='announcements') { loadAllAnn(); document.getElementById('f-sec-announcements').style.display='block'; }
+  else if(sec==='profile') { document.getElementById('f-sec-profile').style.display='block'; }
+  else if(sec==='requests') { loadAllEnrollRequests(); document.getElementById('f-sec-requests').style.display='block'; }
+}
+
+async function loadFStats() {
+  try {
+    const s = await api('GET','/api/stats');
+    document.getElementById('fs-cls').textContent=s.classes;
+    document.getElementById('fs-files').textContent=s.files;
+    document.getElementById('fs-stu').textContent=s.students;
+    document.getElementById('fs-ann').textContent=s.announcements;
+    if (s.pendingRequests > 0) {
+      const b = document.getElementById('f-req-badge');
+      b.textContent = s.pendingRequests;
+      b.style.display = 'inline';
+    } else {
+      const b = document.getElementById('f-req-badge');
+      if (b) b.style.display = 'none';
+    }
+  } catch(e) {}
+}
+
+async function loadFClsGrid(gridId) {
+  const grid = document.getElementById(gridId);
+  grid.innerHTML = spinner();
+  try {
+    const cls = await api('GET','/api/my/classrooms');
+    allClassrooms = cls;
+    grid.innerHTML = cls.length ? cls.map(c=>clsCard(c,'faculty')).join('') : '<div class="empty"><div class="empty-ico">📚</div><h3>No classrooms yet</h3><p>Create your first classroom above</p></div>';
+  } catch(e) { grid.innerHTML='<div class="empty"><h3>Error loading classrooms</h3></div>'; }
+}
+
+async function loadFClsSelect() {
+  try {
+    const cls = await api('GET','/api/my/classrooms');
+    const sel = document.getElementById('g-cls-sel');
+    sel.innerHTML = cls.map(c=>`<option value="${c.id}">${c.code} – ${c.name}</option>`).join('');
+  } catch(e) {}
+}
+
+async function fOpenCls(id) {
+  selectedCls = id;
+  const cls = allClassrooms.find(c=>c.id===id) || await api('GET',`/api/classrooms/${id}`);
+  document.getElementById('f-det-code').textContent = cls.code;
+  document.getElementById('f-det-name').textContent = cls.name;
+  document.getElementById('f-det-prof').textContent = `${cls.prof} · ${cls.sem} · Section ${cls.section}`;
+  ['dashboard','classrooms','upload','announcements','profile'].forEach(s=>{ const e=document.getElementById('f-sec-'+s); if(e) e.style.display='none'; });
+  document.getElementById('f-sec-detail').style.display='block';
+  document.querySelectorAll('#pg-faculty .nav-it').forEach(n=>n.classList.remove('act'));
+  document.getElementById('f-tb-title').textContent = cls.code;
+  // Reset tabs
+  document.querySelectorAll('#f-sec-detail .tab-bar .tab').forEach((t,i)=>t.classList.toggle('act',i===0));
+  document.getElementById('f-tab-mats').style.display='block';
+  document.getElementById('f-tab-upload').style.display='none';
+  document.getElementById('f-tab-ann').style.display='none';
+  loadFMats(id);
+  loadFAnn(id);
+}
+
+async function loadFMats(id) {
+  const el = document.getElementById('f-mats-list');
+  el.innerHTML = spinner();
+  try {
+    const mats = await api('GET',`/api/classrooms/${id}/materials`);
+    el.innerHTML = mats.length ? `<div class="mats-list">${mats.map(m=>matItem(m,'faculty')).join('')}</div>`
+      : '<div class="empty"><div class="empty-ico">📭</div><h3>No materials yet</h3><p>Upload files using the Upload tab</p></div>';
+  } catch(e) { el.innerHTML='<div class="empty"><h3>Error loading materials</h3></div>'; }
+}
+
+async function loadFAnn(id) {
+  const el = document.getElementById('f-ann-list');
+  el.innerHTML = spinner();
+  try {
+    const anns = await api('GET',`/api/classrooms/${id}/announcements`);
+    el.innerHTML = anns.length ? anns.map(a=>annCard(a)).join('')
+      : '<div class="empty"><div class="empty-ico">📢</div><h3>No announcements yet</h3></div>';
+  } catch(e) { el.innerHTML=''; }
+}
+
+async function loadAllAnn() {
+  const el = document.getElementById('f-all-ann');
+  el.innerHTML = spinner();
+  try {
+    const cls = await api('GET','/api/my/classrooms');
+    let html = '';
+    for (const c of cls) {
+      const anns = await api('GET',`/api/classrooms/${c.id}/announcements`);
+      anns.forEach(a => { a.classCode = c.code; html += annCard(a, true); });
+    }
+    el.innerHTML = html || '<div class="empty"><div class="empty-ico">📢</div><h3>No announcements yet</h3></div>';
+  } catch(e) { el.innerHTML=''; }
+}
+
+// File select
+function onFileSelect(input, key) {
+  selectedFiles[key] = input.files;
+  const el = document.getElementById(key+'-sel-file');
+  if (input.files.length) {
+    el.textContent = `✓ ${input.files[0].name} selected`;
+    el.style.display = 'block';
+    const ni = document.getElementById(key+'-disp')||document.getElementById(key.replace('f','f')+'-disp');
+    if(ni && !ni.value) ni.value = input.files[0].name;
+  }
+}
+
+function handleDrop(e, key) {
+  e.preventDefault();
+  document.getElementById(key+'-dz').classList.remove('drag-over');
+  const dt = e.dataTransfer;
+  selectedFiles[key] = dt.files;
+  const el = document.getElementById(key+'-sel-file');
+  if (dt.files.length) { el.textContent=`✓ ${dt.files[0].name} selected`; el.style.display='block'; }
+}
+
+async function doUpload() {
+  const files = selectedFiles['f'];
+  if (!files||!files.length) return toast('Please select a file first', true);
+  const cat = document.getElementById('f-cat').value;
+  const disp = document.getElementById('f-disp').value.trim() || files[0].name;
+  const desc = document.getElementById('f-desc').value.trim();
+  const fd = new FormData();
+  fd.append('file', files[0]);
+  fd.append('category', cat);
+  fd.append('displayName', disp);
+  fd.append('description', desc);
+  try {
+    await api('POST', `/api/classrooms/${selectedCls}/materials`, fd, true);
+    toast('✓ File uploaded successfully!');
+    document.getElementById('f-disp').value=''; document.getElementById('f-desc').value='';
+    document.getElementById('f-sel-file').style.display='none';
+    selectedFiles['f'] = null;
+    loadFMats(selectedCls);
+  } catch(e) { toast('Upload failed: '+e.message, true); }
+}
+
+async function doUploadGlobal() {
+  const files = selectedFiles['g'];
+  if (!files||!files.length) return toast('Please select a file first', true);
+  const cid = parseInt(document.getElementById('g-cls-sel').value);
+  const cat = document.getElementById('g-cat').value;
+  const disp = document.getElementById('g-disp').value.trim() || files[0].name;
+  const desc = document.getElementById('g-desc').value.trim();
+  const fd = new FormData();
+  fd.append('file', files[0]);
+  fd.append('category', cat);
+  fd.append('displayName', disp);
+  fd.append('description', desc);
+  try {
+    await api('POST', `/api/classrooms/${cid}/materials`, fd, true);
+    toast('✓ File uploaded!');
+    document.getElementById('g-disp').value=''; document.getElementById('g-desc').value='';
+    document.getElementById('g-sel-file').style.display='none';
+    selectedFiles['g'] = null;
+  } catch(e) { toast('Upload failed: '+e.message, true); }
+}
+
+async function deleteMat(id) {
+  if (!confirm('Delete this material? This cannot be undone.')) return;
+  try {
+    await api('DELETE', `/api/materials/${id}`);
+    toast('Material deleted');
+    loadFMats(selectedCls);
+  } catch(e) { toast('Delete failed: '+e.message, true); }
+}
+
+async function postAnn() {
+  const title = document.getElementById('ann-title').value.trim();
+  const body = document.getElementById('ann-body').value.trim();
+  if (!title||!body) return toast('Please fill in title and message', true);
+  try {
+    await api('POST',`/api/classrooms/${selectedCls}/announcements`,{title,body});
+    document.getElementById('ann-title').value=''; document.getElementById('ann-body').value='';
+    toast('Announcement posted!');
+    loadFAnn(selectedCls);
+  } catch(e) { toast('Failed: '+e.message, true); }
+}
+
+async function deleteAnn(id) {
+  if (!confirm('Delete this announcement?')) return;
+  try {
+    await api('DELETE',`/api/announcements/${id}`);
+    toast('Announcement deleted');
+    if (selectedCls) loadFAnn(selectedCls); else loadAllAnn();
+  } catch(e) { toast('Failed: '+e.message, true); }
+}
+
+async function createClass() {
+  const code = document.getElementById('nc-code').value.trim().toUpperCase();
+  const name = document.getElementById('nc-name').value.trim();
+  const sem = document.getElementById('nc-sem').value;
+  const section = document.getElementById('nc-sec').value.trim() || 'ALL';
+  if (!code||!name) return toast('Course code and name are required', true);
+  try {
+    await api('POST','/api/classrooms',{code,name,sem,section});
+    closeModal('mo-cls');
+    document.getElementById('nc-code').value=''; document.getElementById('nc-name').value=''; document.getElementById('nc-sec').value='';
+    toast('✓ Classroom created!');
+    fNav('classrooms', document.querySelector('#pg-faculty .nav-it[data-sec="classrooms"]'));
+  } catch(e) { toast('Failed: '+e.message, true); }
+}
+
+async function saveProfile() {
+  const name = document.getElementById('prof-name').value.trim();
+  const dept = document.getElementById('prof-dept').value.trim();
+  try {
+    await api('PUT','/api/me',{name,dept});
+    currentUser.name=name; currentUser.dept=dept;
+    localStorage.setItem('cv_user',JSON.stringify(currentUser));
+    document.getElementById('fac-name').textContent=name;
+    document.getElementById('fac-av').textContent=avatarInitials(name);
+    toast('Profile updated!');
+  } catch(e) { toast('Failed: '+e.message, true); }
+}
+
+function fSearch(q) { if(q) toast(`Searching for "${q}"…`); }
+
+// ═══════════════════════════════════════════════
+//  STUDENT
+// ═══════════════════════════════════════════════
+async function initStudent() {
+  document.getElementById('stu-name').textContent = currentUser.name;
+  document.getElementById('stu-email').textContent = currentUser.email;
+  document.getElementById('stu-av').textContent = avatarInitials(currentUser.name);
+  sNav('dashboard', document.querySelector('#pg-student .nav-it'));
+}
+
+function sNav(sec, el) {
+  document.querySelectorAll('#pg-student .nav-it').forEach(n=>n.classList.remove('act'));
+  if(el) el.classList.add('act');
+  ['dashboard','classrooms','announcements','downloads','detail','my-requests'].forEach(s=>{ const e=document.getElementById('s-sec-'+s); if(e) e.style.display='none'; });
+  document.getElementById('s-tb-title').textContent = {dashboard:'Dashboard',classrooms:'My Courses',announcements:'Updates',downloads:'Downloads','my-requests':'My Requests'}[sec]||sec;
+  if(sec==='dashboard') { loadSStats(); loadSClsGrid('s-cls-grid'); document.getElementById('s-sec-dashboard').style.display='block'; }
+  else if(sec==='classrooms') { loadSClsGrid('s-cls-grid2'); document.getElementById('s-sec-classrooms').style.display='block'; }
+  else if(sec==='announcements') { loadSAnn(); document.getElementById('s-sec-announcements').style.display='block'; document.getElementById('s-ann-badge').style.display='none'; }
+  else if(sec==='downloads') { loadDlHistory(); document.getElementById('s-sec-downloads').style.display='block'; }
+  else if(sec==='my-requests') { loadMyRequests(); document.getElementById('s-sec-my-requests').style.display='block'; document.getElementById('s-req-badge').style.display='none'; }
+}
+
+async function loadSStats() {
+  try {
+    const s = await api('GET','/api/stats');
+    document.getElementById('ss-cls').textContent=s.classes;
+    document.getElementById('ss-files').textContent=s.files;
+    document.getElementById('ss-dl').textContent=s.downloads;
+    document.getElementById('ss-ann').textContent=s.announcements;
+    if(s.announcements>0) { document.getElementById('s-ann-badge').textContent=s.announcements; document.getElementById('s-ann-badge').style.display='inline'; }
+  } catch(e) {}
+}
+
+async function loadSClsGrid(gridId) {
+  const grid = document.getElementById(gridId);
+  grid.innerHTML = spinner();
+  try {
+    const cls = await api('GET','/api/my/classrooms');
+    allClassrooms = cls;
+    grid.innerHTML = cls.length ? cls.map(c=>clsCard(c,'student')).join('')
+      : '<div class="empty"><div class="empty-ico">📚</div><h3>No courses yet</h3><p>Click "+ Join Course" to enroll</p></div>';
+  } catch(e) { grid.innerHTML='<div class="empty"><h3>Error loading courses</h3></div>'; }
+}
+
+async function sOpenCls(id) {
+  selectedCls = id;
+  const cls = allClassrooms.find(c=>c.id===id) || await api('GET',`/api/classrooms/${id}`);
+  document.getElementById('s-det-code').textContent = cls.code;
+  document.getElementById('s-det-name').textContent = cls.name;
+  document.getElementById('s-det-prof').textContent = `${cls.prof} · ${cls.sem} · Section ${cls.section}`;
+  ['dashboard','classrooms','announcements','downloads'].forEach(s=>{ const e=document.getElementById('s-sec-'+s); if(e) e.style.display='none'; });
+  document.getElementById('s-sec-detail').style.display='block';
+  document.querySelectorAll('#pg-student .nav-it').forEach(n=>n.classList.remove('act'));
+  document.getElementById('s-tb-title').textContent = cls.code;
+  const mats = await api('GET',`/api/classrooms/${id}/materials`);
+  const cats = [...new Set(mats.map(m=>m.category))];
+  const tabBar = document.getElementById('s-tabs');
+  tabBar.innerHTML = cats.map((c,i)=>`<div class="tab ${i===0?'act':''}" onclick="sFilterCat(this,'${c}',${JSON.stringify(mats).replace(/'/g,"\\'").replace(/</g,'&lt;')})">${CAT_ICO[c]||'📁'} ${c}</div>`).join('');
+  renderSMats(mats, cats[0]);
+}
+
+function sFilterCat(el, cat, mats) {
+  el.closest('.tab-bar').querySelectorAll('.tab').forEach(t=>t.classList.remove('act'));
+  el.classList.add('act');
+  renderSMats(typeof mats==='string'?JSON.parse(mats):mats, cat);
+}
+
+function renderSMats(mats, cat) {
+  const filtered = cat ? mats.filter(m=>m.category===cat) : mats;
+  document.getElementById('s-mats-container').innerHTML = filtered.length
+    ? `<div class="mats-list">${filtered.map(m=>matItem(m,'student')).join('')}</div>`
+    : '<div class="empty"><div class="empty-ico">📭</div><h3>No files in this category</h3></div>';
+}
+
+async function dlFile(id, name) {
+  toast(`⬇️ Downloading "${name}"…`);
+  // Trigger real download
+  const a = document.createElement('a');
+  a.href = `${API}/api/materials/${id}/download`;
+  a.download = name;
+  a.click();
+  // Refresh stats
+  setTimeout(() => loadSStats(), 1000);
+  // Add to history UI
+  const list = document.getElementById('s-dl-list');
+  const empty = list.querySelector('.empty');
+  if (empty) list.innerHTML = '';
+  const item = document.createElement('div');
+  item.className = 'mat-item';
+  item.innerHTML = `<div class="f-ico f-pdf">📄</div><div class="mat-info"><div class="mat-name">${name}</div><div class="mat-meta"><span>📅 ${new Date().toISOString().split('T')[0]}</span></div></div>`;
+  list.prepend(item);
+}
+
+async function loadSAnn() {
+  const el = document.getElementById('s-ann-page');
+  el.innerHTML = spinner();
+  try {
+    const cls = await api('GET','/api/my/classrooms');
+    let html = '';
+    for (const c of cls) {
+      const anns = await api('GET',`/api/classrooms/${c.id}/announcements`);
+      anns.forEach(a => { a.classCode = c.code; html += annCard(a, true); });
+    }
+    el.innerHTML = html || '<div class="empty"><div class="empty-ico">🔔</div><h3>No updates yet</h3></div>';
+  } catch(e) { el.innerHTML=''; }
+}
+
+async function loadDlHistory() {
+  try {
+    const dls = await api('GET','/api/my/downloads');
+    const list = document.getElementById('s-dl-list');
+    if (!dls.length) { list.innerHTML='<div class="empty"><div class="empty-ico">⬇️</div><h3>No downloads yet</h3><p>Files you download will appear here</p></div>'; return; }
+    list.innerHTML = `<div class="mats-list">${dls.map(d=>`<div class="mat-item"><div class="f-ico f-${d.filetype}">${FILE_ICO[d.filetype]||'📄'}</div><div class="mat-info"><div class="mat-name">${d.name}</div><div class="mat-meta"><span>📁 ${d.category}</span><span>🏫 ${d.classCode}</span><span>📅 ${d.date}</span></div></div></div>`).join('')}</div>`;
+  } catch(e) {}
+}
+
+// Enroll modal
+async function openEnrollModal() {
+  openModal('mo-enroll');
+  const el = document.getElementById('enroll-list');
+  el.innerHTML = spinner();
+  try {
+    const all = await api('GET','/api/classrooms');
+    const mine = await api('GET','/api/my/classrooms');
+    const myIds = new Set(mine.map(c=>c.id));
+    const b = BANNERS;
+    el.innerHTML = all.map(c=>{
+      const enrolled = myIds.has(c.id);
+      // Check pending request
+      let reqStatus = null;
+      try { const myReqs2 = await api('GET','/api/my/enrollment-requests'); reqStatus = (myReqs2.find(r=>r.classroomId===c.id)||{}).status; } catch(_) {}
+      const isPending = reqStatus==='pending';
+      const isRejected = reqStatus==='rejected';
+      const canJoin = !enrolled && !isPending;
+      return `<div class="enroll-item ${enrolled?'enrolled':isPending?'':''}${isRejected?' ':''}" onclick="${canJoin?'enrollIn('+c.id+')':''}">
+        <div>
+          <div style="font-size:.78rem;font-weight:700;color:${b[c.banner%b.length].bg}">${c.code}</div>
+          <div style="font-size:.85rem;color:var(--navy);font-weight:500">${c.name}</div>
+          <div style="font-size:.72rem;color:var(--tm)">${c.prof} · ${c.sem}</div>
+        </div>
+        <span style="font-size:.75rem;font-weight:600;color:${enrolled?'var(--green)':isPending?'var(--gold)':isRejected?'var(--red)':'var(--gold)'}">${enrolled?'✓ Enrolled':isPending?'⏳ Pending':isRejected?'✕ Rejected':'Join →'}</span>
+      </div>`;
+    }).join('');
+  } catch(e) { el.innerHTML='<div class="empty"><h3>Error loading classrooms</h3></div>'; }
+}
+// Override the openModal for enroll
+const _origOpen = openModal;
+window.openModal = function(id) {
+  if (id==='mo-enroll') openEnrollModal();
+  else _origOpen(id);
+};
+
+async function enrollIn(cid) {
+  try {
+    await api('POST',`/api/classrooms/${cid}/enroll`);
+    toast('✓ Enrollment request sent! Awaiting faculty approval.');
+    closeModal('mo-enroll');
+    loadSStats();
+    loadSClsGrid('s-cls-grid');
+    const b = document.getElementById('s-req-badge');
+    if (b) { b.textContent='!'; b.style.display='inline'; }
+  } catch(e) { toast('Failed: '+e.message, true); }
+}
+
+function sSearch(q) { if(q) toast(`Searching for "${q}"…`); }
+
+// ═══════════════════════════════════════════════
+//  ENROLLMENT REQUESTS (FACULTY)
+// ═══════════════════════════════════════════════
+let allEnrollRequests = [];
+let currentReqFilter = 'pending';
+
+async function loadAllEnrollRequests() {
+  const el = document.getElementById('f-req-list');
+  el.innerHTML = spinner();
+  try {
+    const cls = await api('GET','/api/my/classrooms');
+    let all = [];
+    for (const c of cls) {
+      const reqs = await api('GET',`/api/classrooms/${c.id}/enrollment-requests`);
+      reqs.forEach(r => { r.className = c.name; r.classCode = c.code; });
+      all = all.concat(reqs);
+    }
+    allEnrollRequests = all;
+    renderReqs(currentReqFilter);
+    // Update badge
+    const pending = all.filter(r=>r.status==='pending').length;
+    const b = document.getElementById('f-req-badge');
+    if (b) { b.textContent = pending; b.style.display = pending>0 ? 'inline' : 'none'; }
+  } catch(e) { el.innerHTML='<div class="empty"><h3>Error loading requests</h3></div>'; }
+}
+
+function filterReqs(status, btn) {
+  currentReqFilter = status;
+  document.querySelectorAll('#f-req-tabs button').forEach(b => b.className='btn-sm');
+  btn.className = 'btn-sm gold';
+  renderReqs(status);
+}
+
+function renderReqs(filter) {
+  const el = document.getElementById('f-req-list');
+  const filtered = filter==='all' ? allEnrollRequests : allEnrollRequests.filter(r=>r.status===filter);
+  if (!filtered.length) {
+    el.innerHTML = `<div class="empty"><div class="empty-ico">📬</div><h3>No ${filter==='all'?'':filter} requests</h3></div>`;
+    return;
+  }
+  el.innerHTML = filtered.map(r => {
+    const initials = r.studentName.trim().split(/\s+/).map(w=>w[0]).join('').toUpperCase().slice(0,2);
+    const acts = r.status==='pending'
+      ? `<button class="btn-approve" onclick="approveReq(${r.id})">✓ Approve</button>
+         <button class="btn-reject" onclick="rejectReq(${r.id})">✕ Reject</button>`
+      : `<span class="status-badge status-${r.status}">${r.status==='approved'?'✓ Approved':'✕ Rejected'}</span>`;
+    return `<div class="req-item" id="req-${r.id}">
+      <div class="req-avatar">${initials}</div>
+      <div class="req-info">
+        <div class="req-name">${r.studentName}</div>
+        <div class="req-meta">
+          <span>✉ ${r.studentEmail}</span>
+          ${r.dept?`<span>🏫 ${r.dept}</span>`:''}
+          <span>📚 ${r.classCode} – ${r.className}</span>
+          <span>📅 ${r.date}</span>
+        </div>
+      </div>
+      <div class="req-acts">${acts}</div>
+    </div>`;
+  }).join('');
+}
+
+async function approveReq(rid) {
+  try {
+    await api('POST',`/api/enrollment-requests/${rid}/approve`);
+    toast('✓ Student approved and enrolled!');
+    loadAllEnrollRequests();
+    loadFStats();
+  } catch(e) { toast('Failed: '+e.message, true); }
+}
+
+async function rejectReq(rid) {
+  try {
+    await api('POST',`/api/enrollment-requests/${rid}/reject`);
+    toast('Request rejected.');
+    loadAllEnrollRequests();
+    loadFStats();
+  } catch(e) { toast('Failed: '+e.message, true); }
+}
+
+// ═══════════════════════════════════════════════
+//  STUDENTS LIST IN CLASSROOM (FACULTY)
+// ═══════════════════════════════════════════════
+async function loadFStudents(cid) {
+  const el = document.getElementById('f-students-list');
+  el.innerHTML = spinner();
+  try {
+    // Get enrolled students via enrollment_requests approved + original enrollments
+    const reqs = await api('GET',`/api/classrooms/${cid}/enrollment-requests`);
+    const approved = reqs.filter(r=>r.status==='approved');
+    if (!approved.length) {
+      el.innerHTML = '<div class="empty"><div class="empty-ico">👥</div><h3>No enrolled students yet</h3><p>Students will appear here after you approve their requests</p></div>';
+      return;
+    }
+    el.innerHTML = approved.map(r => {
+      const initials = r.studentName.trim().split(/\s+/).map(w=>w[0]).join('').toUpperCase().slice(0,2);
+      return `<div class="req-item" id="stu-${r.studentId}">
+        <div class="req-avatar">${initials}</div>
+        <div class="req-info">
+          <div class="req-name">${r.studentName}</div>
+          <div class="req-meta">
+            <span>✉ ${r.studentEmail}</span>
+            ${r.dept?`<span>🏫 ${r.dept}</span>`:''}
+          </div>
+        </div>
+        <div class="req-acts">
+          <button class="btn-reject" onclick="removeStudent(${r.studentId},${cid},'${r.studentName.replace(/'/g,\"\'\")}')" title="Remove student">Remove</button>
+        </div>
+      </div>`;
+    }).join('');
+  } catch(e) { el.innerHTML='<div class="empty"><h3>Error loading students</h3></div>'; }
+}
+
+async function removeStudent(studentId, cid, name) {
+  if (!confirm(`Remove ${name} from this course?`)) return;
+  try {
+    await api('DELETE',`/api/classrooms/${cid}/students/${studentId}`);
+    toast(`${name} removed from course`);
+    loadFStudents(cid);
+    loadFStats();
+  } catch(e) { toast('Failed: '+e.message, true); }
+}
+
+// ═══════════════════════════════════════════════
+//  DELETE CLASSROOM
+// ═══════════════════════════════════════════════
+async function deleteClassroom() {
+  if (!selectedCls) return;
+  const cls = allClassrooms.find(c=>c.id===selectedCls);
+  const name = cls ? cls.name : 'this course';
+  if (!confirm(`Remove "${name}"? This will delete all materials, announcements and student enrollments. This cannot be undone.`)) return;
+  try {
+    await api('DELETE',`/api/classrooms/${selectedCls}`);
+    toast('Course removed');
+    selectedCls = null;
+    fNav('classrooms', document.querySelector('#pg-faculty .nav-it[data-sec="classrooms"]'));
+    loadFStats();
+  } catch(e) { toast('Failed: '+e.message, true); }
+}
+
+// ═══════════════════════════════════════════════
+//  STUDENT ENROLLMENT REQUESTS
+// ═══════════════════════════════════════════════
+async function loadMyRequests() {
+  const el = document.getElementById('s-my-req-list');
+  el.innerHTML = spinner();
+  try {
+    const reqs = await api('GET','/api/my/enrollment-requests');
+    if (!reqs.length) {
+      el.innerHTML = '<div class="empty"><div class="empty-ico">📋</div><h3>No requests yet</h3><p>Join a course to submit an enrollment request</p></div>';
+      return;
+    }
+    const pending = reqs.filter(r=>r.status==='pending').length;
+    const b = document.getElementById('s-req-badge');
+    if (b) { b.textContent = pending; b.style.display = pending>0 ? 'inline' : 'none'; }
+    el.innerHTML = reqs.map(r => `
+      <div class="req-item">
+        <div class="f-ico f-pdf" style="width:42px;height:42px;flex-shrink:0">📚</div>
+        <div class="req-info">
+          <div class="req-name">${r.code} – ${r.name}</div>
+          <div class="req-meta">
+            <span>👨‍🏫 ${r.faculty}</span>
+            <span>📅 Requested ${r.date}</span>
+          </div>
+        </div>
+        <span class="status-badge status-${r.status}">${{pending:'⏳ Pending',approved:'✓ Approved',rejected:'✕ Rejected'}[r.status]}</span>
+      </div>`).join('');
+  } catch(e) { el.innerHTML='<div class="empty"><h3>Error loading requests</h3></div>'; }
+}
+
+</script>
+</body>
+</html>
