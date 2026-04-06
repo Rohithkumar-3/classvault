@@ -13,7 +13,6 @@ import hashlib
 import secrets
 import time
 import re
-import cgi
 import shutil
 import mimetypes
 import urllib.parse
